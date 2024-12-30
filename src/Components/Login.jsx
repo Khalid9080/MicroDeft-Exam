@@ -5,9 +5,9 @@ import { FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(""); // To store error messages
-    const [loading, setLoading] = useState(false); // To track loading state
-    const navigate = useNavigate(); // For navigation after successful login
+    const [errorMessage, setErrorMessage] = useState("");
+    const [loading, setLoading] = useState(false); 
+    const navigate = useNavigate();
 
     const togglePasswordVisibility = () => {
         setShowPassword(prevState => !prevState);
@@ -18,44 +18,37 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-
-        // Password validation (minimum 8 characters)
         if (password.length < 8) {
             setErrorMessage("Password must be at least 8 characters.");
-            return;  // Prevent form submission if validation fails
+            return;
         } else {
-            setErrorMessage("");  // Clear previous error message
+            setErrorMessage("");
         }
 
-        setLoading(true); // Start loading
-
-        // Sending data to the login API
+        setLoading(true); 
         fetch('https://react-interview.crd4lc.easypanel.host/api/login', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }), // Send email and password as JSON
+            body: JSON.stringify({ email, password }),
         })
         .then(response => response.json())
         .then(data => {
-            setLoading(false); // End loading
+            setLoading(false); 
 
             if (data.status && data.data.token) {
-                // If login is successful, store the token
-                localStorage.setItem('authToken', data.data.token); // Store token in localStorage
+                localStorage.setItem('authToken', data.data.token);
 
                 console.log('Login Successful:', data);
-                // Redirect to /add_course page
                 navigate('/add_course');
             } else {
-                // Handle login failure (e.g., invalid credentials)
                 setErrorMessage(data.status_message || 'Login failed. Please try again.');
             }
         })
         .catch(error => {
-            setLoading(false); // End loading
+            setLoading(false);
             console.error('Error:', error);
             setErrorMessage('An error occurred. Please try again later.');
         });
@@ -98,8 +91,6 @@ const Login = () => {
                                 <a className="text-sm link link-hover">Forgot password?</a>
                             </label>
                         </div>
-
-                        {/* Display error message if login fails */}
                         {errorMessage && (
                             <div className="text-red-500 text-sm mt-2">
                                 {errorMessage}
@@ -109,7 +100,7 @@ const Login = () => {
                         <div className="form-control mt-5">
                             <button
                                 className="btn bg-black text-white hover:text-black"
-                                disabled={loading} // Disable button when loading
+                                disabled={loading} 
                             >
                                 {loading ? 'Logging in...' : 'Login'}
                             </button>

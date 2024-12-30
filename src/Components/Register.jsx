@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Register = () => {
-    const [errorMessage, setErrorMessage] = useState("");  // State to hold error message
+    const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -11,33 +12,29 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        // Password validation (minimum 8 characters)
         if (password.length < 8) {
             setErrorMessage("Password must be at least 8 characters.");
-            return;  // Prevent form submission
+            return; 
         } else {
-            setErrorMessage("");  // Clear any previous error messages
+            setErrorMessage("");
         }
 
         const RegisteredUser = { name, email, password };
-
-        // Sending data to the API using fetch
         fetch('https://react-interview.crd4lc.easypanel.host/api/register', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(RegisteredUser), // Convert object to JSON string
+            body: JSON.stringify(RegisteredUser), 
         })
-        .then(response => response.json()) // Parse the JSON response
+        .then(response => response.json())
         .then(data => {
             console.log('Success Post Registered data to API:', data);
-            // Handle success, maybe redirect or show a success message
+            navigate('/login'); 
         })
         .catch(error => {
             console.error('Error:', error);
-            // Handle error, maybe show an error message to the user
         });
     };
 
@@ -67,8 +64,6 @@ const Register = () => {
                             </label>
                             <input name="password" placeholder="password" className="input input-bordered" required />
                         </div>
-
-                        {/* Show error message if password is less than 8 characters */}
                         {errorMessage && (
                             <div className="text-red-500 text-sm mt-2">
                                 {errorMessage}

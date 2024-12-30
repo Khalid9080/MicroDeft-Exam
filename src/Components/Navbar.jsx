@@ -12,7 +12,7 @@ const Navbar = () => {
     const link2 = (
         <div className="font-semibold space-x-2 flex">
             <li><NavLink to="/login" className="text-base">Login</NavLink></li>
-            <li><NavLink to="/register" className="text-base">Register</NavLink></li>
+            <li><NavLink to="/" className="text-base">Register</NavLink></li>
         </div>
     );
 

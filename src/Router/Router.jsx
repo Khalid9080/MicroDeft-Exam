@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path: "/Register",
+                path: "/",
                 element: <Register></Register>
             },
             {
@@ -27,6 +27,8 @@ export const router = createBrowserRouter([
                 element: <Display_Course></Display_Course>
             },
         
+           
+
 
         ],
 

@@ -60,7 +60,7 @@ const Add_Course = () => {
                 <div className="text-center p-10">
                     <h1 className="text-5xl font-bold">Add Your Course</h1>
                     <p className="py-6">
-                        Crowdfunding is a method of raising capital through the collective effort of friends, family, customers, and individual investors. This approach taps into the collective efforts of a large pool of individuals—primarily online via social media and crowdfunding platforms—and leverages their networks for greater reach.
+                    Adding a new course allows you to share your knowledge and expertise with others. By filling out the form below, you can provide all the necessary details about your course, including the title, description, badge information, and instructor name. Make sure to complete all fields to ensure your course is properly listed and accessible to potential students.
                     </p>
                 </div>
                 <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
